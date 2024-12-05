@@ -15,6 +15,7 @@ export class BarcodeListComponent {
   constructor(public barcodeService: BarcodeService) { }
 
   handleDelete(bc: Barcode) {
+    this.spinnerOn = this.spinnerOn.filter(code => code != bc.code);
     this.barcodeService.delete(bc);
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {BarcodeService} from "../../service/barcode.service";
 import {Barcode} from "../../model/barcode.declaration";
+import {PacketStatus} from "../../model/network.declaration";
 
 @Component({
   selector: 'app-barcode-list',
@@ -9,6 +10,8 @@ import {Barcode} from "../../model/barcode.declaration";
 })
 export class BarcodeListComponent {
 
+  public spinnerOn : string[] = [];
+
   constructor(public barcodeService: BarcodeService) { }
 
   handleDelete(bc: Barcode) {
@@ -16,9 +19,12 @@ export class BarcodeListComponent {
   }
 
   handleFetchInfo(bc: Barcode){
+    this.spinnerOn.push(bc.code);
     this.barcodeService.fetchInfo(bc).state.subscribe({
       next: (state) => {
-        console.log("New packte state:" + state);
+        if(state == PacketStatus.SENT){
+          this.spinnerOn = this.spinnerOn.filter(code => code != bc.code);
+        }
       }
     });
   }

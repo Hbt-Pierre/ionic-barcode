@@ -11,6 +11,7 @@ export class BarcodeComponent{
   @Input() barcode?: Barcode;
   @Output() fetchInfo : EventEmitter<Barcode> = new EventEmitter();
   @Output() delete : EventEmitter<Barcode> = new EventEmitter();
+  @Input() infoLoading: boolean = false;
 
   constructor() { }
 

@@ -12,7 +12,12 @@
     </ion-item>
 
     <ion-item-options>
-      @if(!barcode.bookMeta){
+      @if(infoLoading){
+        <ion-item-option>
+          <ion-spinner></ion-spinner>
+        </ion-item-option>
+      }
+      @else if(!barcode.bookMeta){
         <ion-item-option (click)="fetchInfo.emit(barcode)">Info</ion-item-option>
       }
       <ion-item-option color="danger" (click)="delete.emit(barcode)">Supprimer</ion-item-option>

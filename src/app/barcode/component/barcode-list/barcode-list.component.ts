@@ -16,7 +16,11 @@ export class BarcodeListComponent {
   }
 
   handleFetchInfo(bc: Barcode){
-    this.barcodeService.fetchInfo(bc);
+    this.barcodeService.fetchInfo(bc).state.subscribe({
+      next: (state) => {
+        console.log("New packte state:" + state);
+      }
+    });
   }
 
 }

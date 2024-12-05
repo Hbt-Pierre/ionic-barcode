@@ -3,8 +3,8 @@
     <ion-item>
       <ion-label>
         <h2>{{barcode.code}}</h2>
-        @if(barcode.productName){
-          <p>{{barcode.productName}}</p>
+        @if(barcode.bookMeta){
+          <p>Book Title: {{barcode.bookMeta.details.title}}</p>
         } @else {
           <p>Produit associé inconnu</p>
         }
@@ -12,7 +12,7 @@
     </ion-item>
 
     <ion-item-options>
-      @if(!barcode.productName){
+      @if(!barcode.bookMeta){
         <ion-item-option (click)="fetchInfo.emit(barcode)">Info</ion-item-option>
       }
       <ion-item-option color="danger" (click)="delete.emit(barcode)">Supprimer</ion-item-option>
